@@ -251,7 +251,9 @@
             });
 
             map.on('dblclick', function (e) {
+                console.log("hello console");
                 distanceContainer.innerHTML = '';
+                geojson.features = [];
             });
         });
 
