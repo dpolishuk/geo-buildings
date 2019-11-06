@@ -3,7 +3,7 @@
 
 <head>
     <meta charset='utf-8' />
-    <title>Display a popup on click</title>
+    <title>Measure distances</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
@@ -25,17 +25,31 @@
 <body>
 
     <style>
-        .mapboxgl-popup {
-            max-width: 400px;
-            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        .distance-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+        }
+
+        .distance-container>* {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 11px;
+            line-height: 18px;
+            display: block;
+            margin: 0;
+            padding: 5px 10px;
+            border-radius: 3px;
         }
     </style>
+
     <div id='map'></div>
+    <div id='distance' class='distance-container'></div>
 
     <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiZGVlcG9sIiwiYSI6ImNrMm16MmdjcjBsN3AzYng1cXZybTZna3oifQ.5QITR3lm6v4rUGygpafBmA';
-
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
@@ -43,8 +57,56 @@
             zoom: 11.15
         });
 
+        var distanceContainer = document.getElementById('distance');
+
+        // GeoJSON object to hold our measurement features
+        var geojson = {
+            "type": "FeatureCollection",
+            "features": []
+        };
+
+        // Used to draw a line between points
+        var linestring = {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": []
+            }
+        };
+
         map.on('load', function () {
-            // Add a layer showing the places.
+            map.addSource('geojson', {
+                "type": "geojson",
+                "data": geojson
+            });
+
+            // Add styles to the map
+            map.addLayer({
+                id: 'measure-points',
+                type: 'circle',
+                source: 'geojson',
+                paint: {
+                    'circle-radius': 5,
+                    'circle-color': '#000'
+                },
+                filter: ['in', '$type', 'Point']
+            });
+
+            map.addLayer({
+                id: 'measure-lines',
+                type: 'line',
+                source: 'geojson',
+                layout: {
+                    'line-cap': 'round',
+                    'line-join': 'round'
+                },
+                paint: {
+                    'line-color': '#000',
+                    'line-width': 2.5
+                },
+                filter: ['in', '$type', 'LineString']
+            });
+
             map.addLayer({
                 "id": "places",
                 "type": "symbol",
@@ -102,7 +164,7 @@
                                 "type": "Point",
                                 "coordinates": [37.678460, 55.886044]
                             }
-                        },  {
+                        }, {
                             "type": "Feature",
                             "properties": {
                                 "description": "<strong>16 950 000 руб. КВАРТИРА ВТОРИЧКА (от Павла)</strong><p><a href=\"https://mossitirent.intrumnet.com/blanks/download/?hash=d15773a62537252728c29280818cd800&title=ID%3A+570534&extra=2398b218dfa2c7d4d8744da77244343b\" target=\"_blank\" title=\"Opens in a new window\">Мнёвники ул  21   Метро: Хорошево</p>",
@@ -121,8 +183,6 @@
                 }
             });
 
-            // When a click event occurs on a feature in the places layer, open a popup at the
-            // location of the feature, with description HTML from its properties.
             map.on('click', 'places', function (e) {
                 var coordinates = e.features[0].geometry.coordinates.slice();
                 var description = e.features[0].properties.description;
@@ -140,15 +200,65 @@
                     .addTo(map);
             });
 
-            // Change the cursor to a pointer when the mouse is over the places layer.
-            map.on('mouseenter', 'places', function () {
-                map.getCanvas().style.cursor = 'pointer';
+            map.on('click', function (e) {
+                var features = map.queryRenderedFeatures(e.point, { layers: ['measure-points'] });
+
+                // Remove the linestring from the group
+                // So we can redraw it based on the points collection
+                if (geojson.features.length > 1) geojson.features.pop();
+
+                // Clear the Distance container to populate it with a new value
+                distanceContainer.innerHTML = '';
+
+                // If a feature was clicked, remove it from the map
+                if (features.length) {
+                    var id = features[0].properties.id;
+                    geojson.features = geojson.features.filter(function (point) {
+                        return point.properties.id !== id;
+                    });
+                } else {
+                    var point = {
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [
+                                e.lngLat.lng,
+                                e.lngLat.lat
+                            ]
+                        },
+                        "properties": {
+                            "id": String(new Date().getTime())
+                        }
+                    };
+
+                    geojson.features.push(point);
+                }
+
+                if (geojson.features.length > 1) {
+                    linestring.geometry.coordinates = geojson.features.map(function (point) {
+                        return point.geometry.coordinates;
+                    });
+
+                    geojson.features.push(linestring);
+
+                    // Populate the distanceContainer with total distance
+                    var value = document.createElement('pre');
+                    value.textContent = 'Total distance: ' + turf.lineDistance(linestring).toLocaleString() + 'km';
+                    distanceContainer.appendChild(value);
+                }
+
+                map.getSource('geojson').setData(geojson);
             });
 
-            // Change it back to a pointer when it leaves.
-            map.on('mouseleave', 'places', function () {
-                map.getCanvas().style.cursor = '';
+            map.on('dblclick', function (e) {
+                distanceContainer.innerHTML = '';
             });
+        });
+
+        map.on('mousemove', function (e) {
+            var features = map.queryRenderedFeatures(e.point, { layers: ['measure-points'] });
+            // UI indicator for clicking/hovering a point on the map
+            map.getCanvas().style.cursor = (features.length) ? 'pointer' : 'crosshair';
         });
 
         map.addControl(new mapboxgl.NavigationControl());
