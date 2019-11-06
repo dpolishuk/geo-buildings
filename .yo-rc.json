@@ -1,0 +1,42 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.geo.graphy",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "6.4.1",
+    "applicationType": "monolith",
+    "baseName": "geography",
+    "packageName": "com.geo.graphy",
+    "packageFolder": "com/geo/graphy",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "gradle",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "MDlkNzUxZjA0YWYwMTY4NGQxNGY1MzJlY2UxYzIwOGQ3NGJiYjA5NTNhNjg2ODRkYjllZDg0MDBjZTJjN2M1ZWVlNzBiMDUwYTJmM2IzNmZmMWZkYjc4ZjUwZWNlMmFhNGQzY2YwODM3NDhjZmM5YTJmMmJmOTlkZDAzMzI3MjI=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "react",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "testFrameworks": ["cucumber"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": ["en", "ru"],
+    "blueprints": []
+  }
+}
