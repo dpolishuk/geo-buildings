@@ -31,13 +31,15 @@
         }
     </style>
     <div id='map'></div>
+
+    <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiZGVlcG9sIiwiYSI6ImNrMm16MmdjcjBsN3AzYng1cXZybTZna3oifQ.5QITR3lm6v4rUGygpafBmA';
 
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [-77.04, 38.907],
+            center: [37.6254, 55.730],
             zoom: 11.15
         });
 
@@ -53,92 +55,62 @@
                         "features": [{
                             "type": "Feature",
                             "properties": {
-                                "description": "<strong>Make it Mount Pleasant</strong><p><a href=\"http://www.mtpleasantdc.com/makeitmtpleasant\" target=\"_blank\" title=\"Opens in a new window\">Make it Mount Pleasant</a> is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>",
-                                "icon": "theatre"
-                            },
-                            "geometry": {
-                                "type": "Point",
-                                "coordinates": [-77.038659, 38.931567]
-                            }
-                        }, {
-                            "type": "Feature",
-                            "properties": {
-                                "description": "<strong>Mad Men Season Five Finale Watch Party</strong><p>Head to Lounge 201 (201 Massachusetts Avenue NE) Sunday for a <a href=\"http://madmens5finale.eventbrite.com/\" target=\"_blank\" title=\"Opens in a new window\">Mad Men Season Five Finale Watch Party</a>, complete with 60s costume contest, Mad Men trivia, and retro food and drink. 8:00-11:00 p.m. $10 general admission, $20 admission and two hour open bar.</p>",
-                                "icon": "theatre"
-                            },
-                            "geometry": {
-                                "type": "Point",
-                                "coordinates": [-77.003168, 38.894651]
-                            }
-                        }, {
-                            "type": "Feature",
-                            "properties": {
-                                "description": "<strong>Big Backyard Beach Bash and Wine Fest</strong><p>EatBar (2761 Washington Boulevard Arlington VA) is throwing a <a href=\"http://tallulaeatbar.ticketleap.com/2012beachblanket/\" target=\"_blank\" title=\"Opens in a new window\">Big Backyard Beach Bash and Wine Fest</a> on Saturday, serving up conch fritters, fish tacos and crab sliders, and Red Apron hot dogs. 12:00-3:00 p.m. $25.grill hot dogs.</p>",
-                                "icon": "bar"
-                            },
-                            "geometry": {
-                                "type": "Point",
-                                "coordinates": [-77.090372, 38.881189]
-                            }
-                        }, {
-                            "type": "Feature",
-                            "properties": {
-                                "description": "<strong>Ballston Arts & Crafts Market</strong><p>The <a href=\"http://ballstonarts-craftsmarket.blogspot.com/\" target=\"_blank\" title=\"Opens in a new window\">Ballston Arts & Crafts Market</a> sets up shop next to the Ballston metro this Saturday for the first of five dates this summer. Nearly 35 artists and crafters will be on hand selling their wares. 10:00-4:00 p.m.</p>",
-                                "icon": "art-gallery"
-                            },
-                            "geometry": {
-                                "type": "Point",
-                                "coordinates": [-77.111561, 38.882342]
-                            }
-                        }, {
-                            "type": "Feature",
-                            "properties": {
-                                "description": "<strong>Seersucker Bike Ride and Social</strong><p>Feeling dandy? Get fancy, grab your bike, and take part in this year's <a href=\"http://dandiesandquaintrelles.com/2012/04/the-seersucker-social-is-set-for-june-9th-save-the-date-and-start-planning-your-look/\" target=\"_blank\" title=\"Opens in a new window\">Seersucker Social</a> bike ride from Dandies and Quaintrelles. After the ride enjoy a lawn party at Hillwood with jazz, cocktails, paper hat-making, and more. 11:00-7:00 p.m.</p>",
-                                "icon": "bicycle"
-                            },
-                            "geometry": {
-                                "type": "Point",
-                                "coordinates": [-77.052477, 38.943951]
-                            }
-                        }, {
-                            "type": "Feature",
-                            "properties": {
-                                "description": "<strong>Capital Pride Parade</strong><p>The annual <a href=\"http://www.capitalpride.org/parade\" target=\"_blank\" title=\"Opens in a new window\">Capital Pride Parade</a> makes its way through Dupont this Saturday. 4:30 p.m. Free.</p>",
+                                "description": "<strong>3-комн. квартира, 61,7 м²</strong><p><a href=\"https://www.cian.ru/sale/flat/216890714/\" target=\"_blank\" title=\"Opens in a new window\">Москва, ЦАО, р-н Замоскворечье, Пятницкая ул., 76 Добрынинская ⋅ 4 мин. пешкомСерпуховская ⋅ 5 мин. пешкомПавелецкая ⋅ 10 мин. пешком</p>",
                                 "icon": "rocket"
                             },
                             "geometry": {
                                 "type": "Point",
-                                "coordinates": [-77.043444, 38.909664]
+                                "coordinates": [37.625442, 55.730963]
                             }
                         }, {
                             "type": "Feature",
                             "properties": {
-                                "description": "<strong>Muhsinah</strong><p>Jazz-influenced hip hop artist <a href=\"http://www.muhsinah.com\" target=\"_blank\" title=\"Opens in a new window\">Muhsinah</a> plays the <a href=\"http://www.blackcatdc.com\">Black Cat</a> (1811 14th Street NW) tonight with <a href=\"http://www.exitclov.com\" target=\"_blank\" title=\"Opens in a new window\">Exit Clov</a> and <a href=\"http://godsilla.bandcamp.com\" target=\"_blank\" title=\"Opens in a new window\">Gods’illa</a>. 9:00 p.m. $12.</p>",
-                                "icon": "music"
+                                "description": "<strong>2-комн. квартира, 68 м²</strong><p><a href=\"https://www.cian.ru/sale/flat/213782548/\" target=\"_blank\" title=\"Opens in a new window\">Москва, ЦАО, р-н Тверской, 2-й Волконский пер., 3На карте Цветной бульвар ⋅ 7 мин. пешкомДостоевская ⋅ 11 мин. пешкомТрубная ⋅ 13 мин. пешком</p>",
+                                "icon": "rocket"
                             },
                             "geometry": {
                                 "type": "Point",
-                                "coordinates": [-77.031706, 38.914581]
+                                "coordinates": [37.617195, 55.775763]
                             }
                         }, {
                             "type": "Feature",
                             "properties": {
-                                "description": "<strong>A Little Night Music</strong><p>The Arlington Players' production of Stephen Sondheim's  <a href=\"http://www.thearlingtonplayers.org/drupal-6.20/node/4661/show\" target=\"_blank\" title=\"Opens in a new window\"><em>A Little Night Music</em></a> comes to the Kogod Cradle at The Mead Center for American Theater (1101 6th Street SW) this weekend and next. 8:00 p.m.</p>",
-                                "icon": "music"
+                                "description": "<strong>Квартиры и апартаменты от 17,7 млн. рублей</strong><p><a href=\"https://kvalto.ru/gk/zhk-trikolor/\" target=\"_blank\" title=\"Opens in a new window\">17,7 млн. рублей Адрес объекта: Москва, улица Ростокинская, д. 2, вл. 2 ЖК ВДНХ</p>",
+                                "icon": "rocket"
                             },
                             "geometry": {
                                 "type": "Point",
-                                "coordinates": [-77.020945, 38.878241]
+                                "coordinates": [37.663413, 55.832940]
                             }
                         }, {
                             "type": "Feature",
                             "properties": {
-                                "description": "<strong>Truckeroo</strong><p><a href=\"http://www.truckeroodc.com/www/\" target=\"_blank\">Truckeroo</a> brings dozens of food trucks, live music, and games to half and M Street SE (across from Navy Yard Metro Station) today from 11:00 a.m. to 11:00 p.m.</p>",
-                                "icon": "music"
+                                "description": "<strong>Квартиры бизнес-класса от 11 млн. рублей</strong><p><a href=\"https://kvalto.ru/gk/zhk-festival-park/\" target=\"_blank\" title=\"Opens in a new window\">Квартиры бизнес-класса от 11 млн. рублей Адрес объекта: Москва, Фестивальная улица, дом 27</p>",
+                                "icon": "rocket"
                             },
                             "geometry": {
                                 "type": "Point",
-                                "coordinates": [-77.007481, 38.876516]
+                                "coordinates": [37.479582, 55.857068]
+                            }
+                        }, {
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>18 900 000 руб. КВАРТИРА ВТОРИЧКА (от Павла)</strong><p><a href=\"https://mossitirent.intrumnet.com/blanks/download/?hash=5826f596613b2c81ffb214b220fb1e6b&title=ID%3A+570174&extra=2398b218dfa2c7d4d8744da77244343b\" target=\"_blank\" title=\"Opens in a new window\">Широкая ул  30   Метро: Бабушкинская</p>",
+                                "icon": "rocket"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [37.678460, 55.886044]
+                            }
+                        },  {
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>16 950 000 руб. КВАРТИРА ВТОРИЧКА (от Павла)</strong><p><a href=\"https://mossitirent.intrumnet.com/blanks/download/?hash=d15773a62537252728c29280818cd800&title=ID%3A+570534&extra=2398b218dfa2c7d4d8744da77244343b\" target=\"_blank\" title=\"Opens in a new window\">Мнёвники ул  21   Метро: Хорошево</p>",
+                                "icon": "rocket"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [37.481253, 55.773702]
                             }
                         }]
                     }
